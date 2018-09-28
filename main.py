@@ -103,7 +103,7 @@ def main():
             lstGoodPages.append(element.get_attribute("href"))
 
     #lstGoodPages.append("https://www.ariadna-96.ru/detskaya-odezhda/gnkmain-kostyumyi/1528")
-    #lstGoodPages.append("https://www.ariadna-96.ru/detskaya-odezhda/gnkbaby-zimkombinezonyitransformeryi/1299")
+    #stGoodPages.append("https://www.ariadna-96.ru/detskaya-odezhda/gnkbaby-kostyumyi/1526")
     wb = Workbook()
     ws = wb.active
     pagesproxycount = 30
@@ -162,10 +162,12 @@ def main():
             None
         picture = driver.find_element_by_xpath("//div[@class='slides_item item active']/a").get_attribute("href")
         album=driver.find_element_by_xpath("//ol[@class='crumbs']").text.split("одежда")[1]
-        b=""
+
         for CS in driver.find_elements_by_xpath("//div[@class='i-har row pos-rel']"):
             a = CS.find_element_by_xpath(".//div[@class='color_title']").text
-            b += CS.find_element_by_xpath(".//select[@class='form-control itemsizes']/option").text.split("(")[0]+","
+            b = ""
+            for CS1 in CS.find_elements_by_xpath(".//select[@class='form-control itemsizes']/option"):
+                b+=CS1.text.split("(")[0]+","
             dictCS[a]=b[:-1]
         if not len(dictCS):
             continue
